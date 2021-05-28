@@ -1,7 +1,8 @@
+#!/usr/bin/env swipl
 
-:- module(languages_bot, [main/0]).
+:- initialization(main, main).
 
-main :-
+main(Argv) :-
     writeln('Hello, What\'s your name?').
 
 
