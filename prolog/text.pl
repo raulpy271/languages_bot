@@ -2,7 +2,9 @@
 :- module(text, [text/3, text_languages_found/3]).
 
 text("saudation", pt, 
-    "Ola, eu conheco diversas linguagens de programaçao. Posso te ajudar a escolher a mais adequada para voce. Qual area voce tem interesse?").
+    "Ola, eu conheco diversas linguagens de programaçao. Posso te ajudar a escolher a mais adequada para voce.").
+
+text("area_interest", pt, "Qual area voce tem interesse?").
 
 text("paradigm", pt, "E qual paradigma de programaçao voce procurar?").
 
@@ -14,6 +16,11 @@ text("choose_language", pt, "Qual delas voce quer saber mais? ").
 
 text("not_found", pt, "Nao foi encontrado linguagens com essas propriedades.").
 
+text("want_try_another", pt, "Nao se preocupe, posso te apresentar outra linguagem. Tem interesse?").
+
+text("bye", pt, "Ate logo!").
+
+text_languages_found(_, [], "").
 text_languages_found(TextLanguage, Languages, TextFormated) :-
     length(Languages, NumberOfLanguagesFound),
     NumberOfLanguagesFound > 0,
