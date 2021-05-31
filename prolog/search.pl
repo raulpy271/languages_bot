@@ -7,17 +7,23 @@ match_language(Language, AreaOfInterest, Paradigm, TypeSystem) :-
     language(_, _, About, _, LanguageTypes, LanguageParadigm, _) = Language,
     (
         (About \= '', AreaOfInterest \= ''
-        -> sub_atom(About, _, _, _, AreaOfInterest)
+        -> downcase_atom(About, AboutLowered),
+           downcase_atom(AreaOfInterest, AreaOfInterestLowered),
+           sub_atom(AboutLowered, _, _, _, AreaOfInterestLowered)
         ;  false
         )
     ;
         (LanguageParadigm \= '', Paradigm \= ''
-        -> sub_atom(LanguageParadigm, _, _, _, Paradigm)
+        -> downcase_atom(LanguageParadigm, LanguageParadigmLowered),
+           downcase_atom(Paradigm, ParadigmLowered),
+           sub_atom(LanguageParadigmLowered, _, _, _, ParadigmLowered)
         ;  false
         )
     ;
         (LanguageTypes \= '', TypeSystem \= ''
-        -> sub_atom(LanguageTypes, _, _, _, TypeSystem)
+        -> downcase_atom(LanguageTypes, LanguageTypesLowered),
+           downcase_atom(TypeSystem, TypeSystemLowered),
+           sub_atom(LanguageTypesLowered, _, _, _, TypeSystemLowered)
         ;  false
         )
     ).
