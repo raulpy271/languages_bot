@@ -67,3 +67,17 @@ filter_languages(
         RestLanguagesFound),
     LanguagesFound = RestLanguagesFound.
 
+search_by_name(NameToSearch, [Language | _ ], LanguageFound) :-
+    language(Name, _, _, _, _, _, _) = Language,
+    downcase_atom(NameToSearch, NameToSearchLowered),
+    downcase_atom(Name, NameLowered),
+    sub_atom(NameLowered, _, _, _, NameToSearchLowered),
+    Language = LanguageFound.
+search_by_name(NameToSearch, [Language | RestLanguages], LanguageFound) :-
+    language(Name, _, _, _, _, _, _) = Language,
+    downcase_atom(NameToSearch, NameToSearchLowered),
+    downcase_atom(Name, NameLowered),
+    not(sub_atom(NameLowered, _, _, _, NameToSearchLowered)),
+    search_by_name(NameToSearch, RestLanguages, LanguageFound).
+    
+
