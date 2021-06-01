@@ -8,8 +8,7 @@
 :- initialization(main, main).
 
 main(_) :-
-    TextLanguage = pt,
-    text("saudation", TextLanguage, Saudation),
+    text("saudation", Saudation),
     writeln(""),
     writeln(Saudation),
     conversation.
@@ -17,26 +16,25 @@ main(_) :-
 conversation :-
     Paradigm = '',
     TypeSystem = '',
-    TextLanguage = pt,
-    text("area_interest", TextLanguage, AreaOfInterestText),
+    text("area_interest", AreaOfInterestText),
     writeln(AreaOfInterestText),
     read(AreaOfInterest),
     search_languages(AreaOfInterest, Paradigm, TypeSystem, LanguagesFound),
-    text_languages_found(TextLanguage, LanguagesFound, LanguagesFoundText),
+    text_languages_found(LanguagesFound, LanguagesFoundText),
     (LanguagesFoundText \= ""
         -> writeln(LanguagesFoundText)
         ; not_found_conversation
     ).
 
 not_found_conversation :-
-    text("not_found", TextLanguage, LanguagesNotFoundText),
+    text("not_found", LanguagesNotFoundText),
     writeln(LanguagesNotFoundText),
-    text("want_try_another", TextLanguage, WantTryAnotherText),
+    text("want_try_another", WantTryAnotherText),
     writeln(WantTryAnotherText),
     read(WantTryAnotherAnswer),
     (is_positive_answer(WantTryAnotherAnswer)
         -> conversation
-        ; text("bye", TextLanguage, ByeText),
+        ; text("bye", ByeText),
           writeln(ByeText)
     ).
 
