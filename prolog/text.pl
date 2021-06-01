@@ -1,32 +1,38 @@
 
-:- module(text, [text/3, text_languages_found/3]).
+:- module(text, [text/2, text_languages_found/2]).
 
-text("saudation", pt, 
+text_language(pt).
+
+text(TextKey, Text) :-
+    text_language(TextLanguage),
+    insert_text(TextKey, TextLanguage, Text).
+
+insert_text("saudation", pt, 
     "Ola, eu conheco diversas linguagens de programaçao. Posso te ajudar a escolher a mais adequada para voce.").
 
-text("area_interest", pt, "Qual area voce tem interesse?").
+insert_text("area_interest", pt, "Qual area voce tem interesse?").
 
-text("paradigm", pt, "E qual paradigma de programaçao voce procurar?").
+insert_text("paradigm", pt, "E qual paradigma de programaçao voce procurar?").
 
-text("type-system", pt, "Como eh o sistema de tipos mais adequada?").
+insert_text("type-system", pt, "Como eh o sistema de tipos mais adequada?").
 
-text("languages_found", pt, "As linguagens encontradas foram: ").
+insert_text("languages_found", pt, "As linguagens encontradas foram: ").
 
-text("choose_language", pt, "Qual delas voce quer saber mais? ").
+insert_text("choose_language", pt, "Qual delas voce quer saber mais? ").
 
-text("not_found", pt, "Nao foi encontrado linguagens com essas propriedades.").
+insert_text("not_found", pt, "Nao foi encontrado linguagens com essas propriedades.").
 
-text("want_try_another", pt, "Nao se preocupe, posso te apresentar outra linguagem. Tem interesse?").
+insert_text("want_try_another", pt, "Nao se preocupe, posso te apresentar outra linguagem. Tem interesse?").
 
-text("bye", pt, "Ate logo!").
+insert_text("bye", pt, "Ate logo!").
 
-text_languages_found(_, [], "").
-text_languages_found(TextLanguage, Languages, TextFormated) :-
+text_languages_found([], "").
+text_languages_found(Languages, TextFormated) :-
     length(Languages, NumberOfLanguagesFound),
     NumberOfLanguagesFound > 0,
     convert_languages_to_string(Languages, LanguagesFormated),
-    text("languages_found", TextLanguage, LanguagesFoundText),
-    text("choose_language", TextLanguage, ChooseText),
+    text("languages_found", LanguagesFoundText),
+    text("choose_language", ChooseText),
     atom_concat(
         LanguagesFoundText, LanguagesFormated, LanguagesFoudFormated),
     atom_concat(LanguagesFoudFormated, ChooseText, TextFormated).
