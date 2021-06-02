@@ -1,5 +1,8 @@
 
-:- module(text, [text/2, text_languages_found/2]).
+:- module(text, [
+    text/2, 
+    text_languages_found/2, 
+    text_languages_details/2]).
 
 text_language(pt).
 
@@ -22,9 +25,13 @@ insert_text("choose_language", pt, "Qual delas voce quer saber mais? ").
 
 insert_text("not_found", pt, "Nao foi encontrado linguagens com essas propriedades.").
 
-insert_text("want_try_another", pt, "Nao se preocupe, posso te apresentar outra linguagem. Tem interesse?").
+insert_text("want_try_another", pt, "Posso te apresentar outra linguagem. Tem interesse?").
 
 insert_text("bye", pt, "Ate logo!").
+
+insert_text("source", pt, "Fonte: ").
+
+insert_text("homepage", pt, "Pagina oficial: ").
 
 text_languages_found([], "").
 text_languages_found(Languages, TextFormated) :-
@@ -44,4 +51,28 @@ convert_languages_to_string(Languages, TextFormated) :-
     language(Name, _, _, _, _, _, _) = Language,
     atom_concat("\n - ", Name, Item),
     atom_concat(Item, RestItens, TextFormated).
+
+text_languages_details(Language, TextFormated) :-
+    language(_, Source, About, _, _, _, Site) = Language,
+    text_about(About, AboutFormated),
+    text_site(Site, SiteFormated),
+    text_source(Source, SourceFormated),
+    atom_concat(AboutFormated, SourceFormated, AboutAndSource),
+    atom_concat(AboutAndSource, SiteFormated, TextFormated).
+
+text_about('', '').
+text_about(About, AboutFormated) :-
+    atom_concat(About, '\n', AboutFormated).
+
+text_site('', '').
+text_site(Site, SiteFormated) :-
+    text("homepage", HomeText),
+    atom_concat(HomeText, Site, SiteText),
+    atom_concat(SiteText, '\n', SiteFormated).
+
+text_source('', '').
+text_source(Source, SourceFormated) :-
+    text("source", SourceText),
+    atom_concat(SourceText, Source, SourceLinkText),
+    atom_concat(SourceLinkText, '\n', SourceFormated).
 

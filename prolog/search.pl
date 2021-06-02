@@ -1,5 +1,5 @@
 
-:- module(search, [match_language/4, search_languages/4]).
+:- module(search, [search_by_name/3, search_languages/4]).
 
 :- use_module(dataset).
 
