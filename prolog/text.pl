@@ -15,7 +15,7 @@ insert_text("saudation", pt,
 
 insert_text("area_interest", pt, "Qual area voce tem interesse?").
 
-insert_text("paradigm", pt, "E qual paradigma de programaçao voce procurar?").
+insert_text("paradigm", pt, "E qual paradigma de programaçao voce prefere?").
 
 insert_text("type-system", pt, "Como eh o sistema de tipos mais adequada?").
 

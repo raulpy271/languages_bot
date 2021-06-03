@@ -13,11 +13,7 @@ main(_) :-
     conversation.
 
 conversation :-
-    Paradigm = '',
-    TypeSystem = '',
-    text("area_interest", AreaOfInterestText),
-    writeln(AreaOfInterestText),
-    read(AreaOfInterest),
+    ask_user_interest(AreaOfInterest, Paradigm, TypeSystem),
     search_languages(AreaOfInterest, Paradigm, TypeSystem, LanguagesFound),
     (LanguagesFound \= []
         -> select_language_details(LanguagesFound)
@@ -25,6 +21,17 @@ conversation :-
           writeln(LanguagesNotFoundText),
           try_another_language
     ).
+
+ask_user_interest(AreaOfInterest, Paradigm, TypeSystem) :-
+    text("area_interest", AreaOfInterestText),
+    text("type-system", TypeSystemText),
+    text("paradigm", ParadigmText),
+    writeln(AreaOfInterestText),
+    read(AreaOfInterest),
+    writeln(TypeSystemText),
+    read(TypeSystem),
+    writeln(ParadigmText),
+    read(Paradigm).
 
 select_language_details(LanguagesFound) :-
     text_languages_found(LanguagesFound, LanguagesFoundText),
